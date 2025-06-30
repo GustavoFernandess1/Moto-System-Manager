@@ -1,0 +1,52 @@
+# .gitignore para projetos .NET / ASP.NET Core
+
+# Pastas de build
+bin/
+obj/
+
+# Arquivos de usuário do Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configurações locais
+.vscode/
+*.local.json
+
+# Arquivos de log
+*.log
+
+# Arquivos de publicação
+publish/
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Pacotes NuGet
+*.nupkg
+# Pasta de pacotes (caso use restore local)
+packages/
+
+# Arquivos de backup
+*~
+*.bak
+
+# Arquivos de banco de dados locais
+*.mdf
+*.ldf
+
+# Outros arquivos que não devem ir para o repositório
+.DS_Store
+Thumbs.db
+
+# Arquivos de build do Rider/JetBrains
+.idea/
+*.sln.iml
+
+# Arquivos de configuração do sistema operacional
+Desktop.ini
+
+# Arquivos de secrets
+secrets.json
