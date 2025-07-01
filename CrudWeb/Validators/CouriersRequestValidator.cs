@@ -11,20 +11,20 @@ namespace CrudWeb.Validators
             var errors = new List<string>();
             if (request == null)
             {
-                errors.Add("Request cannot be null.");
+                errors.Add("A requisição não pode ser nula.");
                 return errors;
             }
             if (string.IsNullOrWhiteSpace(request.Name))
-                errors.Add("Name is required.");
+                errors.Add("O campo Nome é obrigatório.");
             var taxIdString = request.TaxId.ToString();
             if (string.IsNullOrWhiteSpace(taxIdString) || taxIdString.Length != 14)
-                errors.Add("TaxId (CNPJ) is required and must be 14 characters.");
+                errors.Add("O campo TaxId (CNPJ) é obrigatório e deve ter 14 caracteres.");
             if (request.Birthdate == DateTime.MinValue)
-                errors.Add("BirthDate is required.");
+                errors.Add("O campo Data de Nascimento é obrigatório.");
             if (string.IsNullOrWhiteSpace(request.LicenseNumber))
-                errors.Add("LicenseNumber is required.");
+                errors.Add("O campo Número da CNH é obrigatório.");
             if (request.LicenseType == default)
-                errors.Add("LicenseType is required.");
+                errors.Add("O campo Tipo de CNH é obrigatório.");
             return errors;
         }
     }

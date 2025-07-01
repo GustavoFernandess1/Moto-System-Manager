@@ -26,7 +26,13 @@ namespace CrudWeb.Controllers
             _motorcycleMapper = motorcycleMapper;
         }
 
-
+        /// <summary>
+        /// Cadastra uma nova moto.
+        /// </summary>
+        /// <param name="motorcycleRequest">Dados da moto a ser cadastrada</param>
+        /// <returns>Dados da moto cadastrada</returns>
+        /// <response code="200">Moto cadastrada com sucesso</response>
+        /// <response code="404">Não encontrado</response>
         [HttpPost("[action]")]
         [ProducesResponseType(typeof(MotorcycleResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,6 +49,13 @@ namespace CrudWeb.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Busca uma moto pela placa.
+        /// </summary>
+        /// <param name="licensePlate">Placa da moto</param>
+        /// <returns>Dados da moto encontrada</returns>
+        /// <response code="200">Moto encontrada com sucesso</response>
+        /// <response code="404">Moto não encontrada</response>
         [HttpGet("ByLicensePlate/{licensePlate}")]
         [ProducesResponseType(typeof(MotorcycleResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -61,6 +74,14 @@ namespace CrudWeb.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Atualiza a placa de uma moto pelo ID.
+        /// </summary>
+        /// <param name="id">ID da moto</param>
+        /// <param name="licensePlateRequest">Nova placa</param>
+        /// <returns>Dados da moto atualizada</returns>
+        /// <response code="200">Placa atualizada com sucesso</response>
+        /// <response code="404">Moto não encontrada</response>
         [HttpPut("ById/{id}")]
         [ProducesResponseType(typeof(MotorcycleResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -77,6 +98,13 @@ namespace CrudWeb.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Busca uma moto pelo ID.
+        /// </summary>
+        /// <param name="id">ID da moto</param>
+        /// <returns>Dados da moto encontrada</returns>
+        /// <response code="200">Moto encontrada com sucesso</response>
+        /// <response code="404">Moto não encontrada</response>
         [HttpGet("ById/{id}")]
         [ProducesResponseType(typeof(MotorcycleResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -90,6 +118,13 @@ namespace CrudWeb.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Deleta uma moto pelo ID.
+        /// </summary>
+        /// <param name="id">ID da moto</param>
+        /// <returns>Dados da moto deletada</returns>
+        /// <response code="200">Moto deletada com sucesso</response>
+        /// <response code="404">Moto não encontrada</response>
         [HttpDelete("ById/{id}")]
         [ProducesResponseType(typeof(MotorcycleResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -7,6 +7,9 @@ namespace CrudWeb.Models.Request
 {
     public class UpdateLicensePlateRequest
     {
+        /// <summary>
+        /// Placa da moto a ser atualizada.
+        /// /// </summary>
         public string LicensePlate { get; set; }
     }
 }
