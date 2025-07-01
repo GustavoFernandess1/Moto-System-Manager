@@ -23,6 +23,10 @@ namespace CrudWeb.Services
         {
             MotorcycleRequestValidator.Validate(request);
 
+            var existing = await _motorcycleRepository.GetByLicensePlateAsync(request.LicensePlate);
+            if (existing != null)
+                throw new InvalidOperationException("Já existe uma moto cadastrada com esta placa.");
+
             var model = new MotorcycleModel
             {
                 Identifier = request.Identifier,
@@ -61,6 +65,10 @@ namespace CrudWeb.Services
 
         public async Task<MotorcycleResponse> UpdateLicensePlateAsync(int id, string licensePlate)
         {
+            var existing = await _motorcycleRepository.GetByLicensePlateAsync(licensePlate);
+            if (existing != null && existing.Identifier != (await _motorcycleRepository.GetByIdAsync(id))?.Identifier)
+                throw new InvalidOperationException("Já existe uma moto cadastrada com esta placa.");
+
             var model = await _motorcycleRepository.GetByIdAsync(id);
             if (model == null)
             {

@@ -22,6 +22,12 @@ namespace CrudWeb.Services
         {
             CouriersRequestValidator.Validate(request);
 
+            var allCouriers = await _couriersRepository.GetAllAsync();
+            if (allCouriers.Any(c => c.TaxId == request.TaxId))
+                throw new InvalidOperationException("Já existe um entregador cadastrado com este CNPJ.");
+            if (allCouriers.Any(c => c.LicenseNumber == request.LicenseNumber))
+                throw new InvalidOperationException("Já existe um entregador cadastrado com este número de CNH.");
+
             var model = new CouriersModel
             {
                 Identifier = request.Identifier,
