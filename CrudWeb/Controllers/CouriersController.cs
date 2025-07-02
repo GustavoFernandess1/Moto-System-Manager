@@ -39,14 +39,41 @@ namespace CrudWeb.Controllers
         public async Task<IActionResult> RegisterCourier([FromBody] CouriersRequest couriersRequest)
         {
             string logIdentifier = Guid.NewGuid().ToString();
-            _logger.LogInformation("{Time} {LogIdentifier} - CouriersServiceRequest mapeado.", DateTime.Now, logIdentifier);
+            _logger.LogInformation("{Time} {LogIdentifier} - Iniciando cadastro de entregador.", DateTime.Now, logIdentifier);
 
-            _ = _couriersMapper.Map(couriersRequest);
-            _logger.LogInformation("{Time} {LogIdentifier} - CouriersServiceRequest convertido para model.", DateTime.Now, logIdentifier);
+            CouriersRequest mappedRequest = _couriersMapper.Map(couriersRequest);
+            _logger.LogInformation("{Time} {LogIdentifier} - CouriersRequest convertido para model.", DateTime.Now, logIdentifier);
 
-            CouriersResponse result = await _couriersService.CreateCourierAsync(couriersRequest);
+            CouriersResponse result = await _couriersService.CreateCourierAsync(mappedRequest);
+            _logger.LogInformation("{Time} {LogIdentifier} - Chamando serviço para cadastrar entregador.", DateTime.Now, logIdentifier);
+
             _logger.LogInformation("{Time} {LogIdentifier} - Entregador cadastrado com sucesso.", DateTime.Now, logIdentifier);
+            return Ok(result);
+        }
 
+        /// <summary>
+        /// Envia a foto da CNH do entregador.
+        /// </summary>
+        /// <param name="id">ID do entregador</param>
+        /// <param name="request">Objeto contendo a imagem em base64</param>
+        /// <returns>Status da operação</returns>
+        /// <response code="201">Imagem salva com sucesso</response>
+        /// <response code="400">Dados inválidos</response>
+        [HttpPost("{id}/cnh")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UploadLicenseImage([FromRoute] string id, [FromBody] UploadLicenseImageRequest request)
+        {
+            string logIdentifier = Guid.NewGuid().ToString();
+            _logger.LogInformation("{Time} {LogIdentifier} - Iniciando upload da CNH do entregador {CourierId}.", DateTime.Now, logIdentifier, id);
+
+            UploadLicenseImageRequest uploadImage = _couriersMapper.Map(request);
+            _logger.LogInformation("{Time} {LogIdentifier} - UploadLicenseImageRequest convertido para model.", DateTime.Now, logIdentifier);
+
+            UploadLicenseImageResponse result = await _couriersService.SaveLicenseImageAsync(id, uploadImage.LicenseImage);
+            _logger.LogInformation("{Time} {LogIdentifier} - Chamando serviço para salvar imagem da CNH do entregador {CourierId}.", DateTime.Now, logIdentifier, id);
+
+            _logger.LogInformation("{Time} {LogIdentifier} - Imagem da CNH do entregador {CourierId} salva com sucesso.", DateTime.Now, logIdentifier, id);
             return Ok(result);
         }
     }

@@ -24,5 +24,15 @@ namespace CrudWeb.Mappers
                 LicenseImage = request.LicenseImage ?? string.Empty
             };
         }
+
+        public UploadLicenseImageRequest Map(UploadLicenseImageRequest request)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request), "O objeto UploadCnhImageRequest não pode ser nulo.");
+            return new UploadLicenseImageRequest
+            {
+                LicenseImage = request.LicenseImage ?? string.Empty
+            };
+        }
     }
 }

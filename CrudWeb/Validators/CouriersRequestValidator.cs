@@ -27,5 +27,20 @@ namespace CrudWeb.Validators
                 errors.Add("O campo Tipo de CNH é obrigatório.");
             return errors;
         }
+
+        public static void Validate(string base64Image)
+        {
+            if (string.IsNullOrWhiteSpace(base64Image))
+                throw new ArgumentException("A imagem da CNH não pode ser nula ou vazia.", nameof(base64Image));
+
+            try
+            {
+                Convert.FromBase64String(base64Image);
+            }
+            catch (FormatException)
+            {
+                throw new ArgumentException("A imagem em base64 é inválida.", nameof(base64Image));
+            }
+        }
     }
 }

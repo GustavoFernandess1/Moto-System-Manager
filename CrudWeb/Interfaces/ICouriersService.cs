@@ -10,5 +10,6 @@ namespace CrudWeb.Interfaces
     public interface ICouriersService
     {
         Task<CouriersResponse> CreateCourierAsync(CouriersRequest request);
+        Task<UploadLicenseImageResponse> SaveLicenseImageAsync(string courierId, string base64Image);
     }
 }
