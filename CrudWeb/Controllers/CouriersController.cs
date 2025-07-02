@@ -59,7 +59,7 @@ namespace CrudWeb.Controllers
         /// <returns>Status da operação</returns>
         /// <response code="201">Imagem salva com sucesso</response>
         /// <response code="400">Dados inválidos</response>
-        [HttpPost("{id}/cnh")]
+        [HttpPost("{id}/LicenseImage")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UploadLicenseImage([FromRoute] string id, [FromBody] UploadLicenseImageRequest request)
