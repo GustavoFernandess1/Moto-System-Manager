@@ -99,7 +99,7 @@ namespace CrudWeb.Services
             }
 
             string ext = isPng ? "png" : "bmp";
-            string folder = Path.Combine(Directory.GetCurrentDirectory(), "storage", "cnhs");
+            string folder = Path.Combine(Directory.GetCurrentDirectory(), "Storage", "LicenseImages");
             Directory.CreateDirectory(folder);
             string filePath = Path.Combine(folder, $"{courierId}.{ext}");
 

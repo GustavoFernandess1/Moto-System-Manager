@@ -20,5 +20,15 @@ namespace CrudWeb.Mappers
                 Plan = request.Plan
             };
         }
+
+        public UpdateReturnDateRequest Map(UpdateReturnDateRequest request)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request), "O objeto UpdateReturnDateRequest não pode ser nulo.");
+            return new UpdateReturnDateRequest
+            {
+                ReturnDate = request.ReturnDate
+            };
+        }
     }
 }

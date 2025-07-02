@@ -42,8 +42,9 @@ namespace CrudWeb.Controllers
             _logger.LogInformation("{Time} {LogIdentifier} - Requisição de agendamento recebida.", DateTime.Now, logIdentifier);
 
             BookingMotorcycleRequest mappedRequest = _bookingMapper.Map(bookingRequest);
-            var result = await _bookingService.CreateBookingAsync(mappedRequest);
+            _logger.LogInformation("{Time} {LogIdentifier} - BookingMotorcycleRequest convertido para model.", DateTime.Now, logIdentifier);
 
+            var result = await _bookingService.CreateBookingAsync(mappedRequest);
             _logger.LogInformation("{Time} {LogIdentifier} - Agendamento criado com sucesso.", DateTime.Now, logIdentifier);
             return CreatedAtAction(nameof(CreateBooking), new { id = result.Id }, result);
         }
@@ -85,8 +86,10 @@ namespace CrudWeb.Controllers
             string logIdentifier = Guid.NewGuid().ToString();
             _logger.LogInformation("{Time} {LogIdentifier} - Requisição de devolução recebida para o agendamento {Id}.", DateTime.Now, logIdentifier, id);
 
-            var result = await _bookingService.UpdateReturnDateAsync(id, updateRequest);
+            UpdateReturnDateRequest mappedRequest = _bookingMapper.Map(updateRequest);
+            _logger.LogInformation("{Time} {LogIdentifier} - UpdateReturnDateRequest convertido para model.", DateTime.Now, logIdentifier);
 
+            var result = await _bookingService.UpdateReturnDateAsync(id, mappedRequest);
             _logger.LogInformation("{Time} {LogIdentifier} - Devolução processada para o agendamento {Id}.", DateTime.Now, logIdentifier, id);
             return Ok(result);
         }

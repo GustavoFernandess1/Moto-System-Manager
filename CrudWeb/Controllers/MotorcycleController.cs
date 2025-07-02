@@ -39,13 +39,13 @@ namespace CrudWeb.Controllers
         public async Task<IActionResult> RegisterMotorcycle([FromBody] MotorcycleRegisterRequest motorcycleRequest)
         {
             string logIdentifier = Guid.NewGuid().ToString();
-            _logger.LogInformation("{Time} {LogIdentifier} - MotorcycleServiceRequest mapped.", DateTime.Now, logIdentifier);
+            _logger.LogInformation("{Time} {LogIdentifier} - Iniciando cadastro de moto.", DateTime.Now, logIdentifier);
 
-            _ = _motorcycleMapper.Map(motorcycleRequest);
-            _logger.LogInformation("{Time} {LogIdentifier} - MotorcycleServiceRequest converted to model.", DateTime.Now, logIdentifier);
+            MotorcycleRegisterRequest mappedRequest = _motorcycleMapper.Map(motorcycleRequest);
+            _logger.LogInformation("{Time} {LogIdentifier} - MotorcycleRegisterRequest convertido para model.", DateTime.Now, logIdentifier);
 
-            MotorcycleResponse result = await _motorcycleService.RegisterMotorcycle(motorcycleRequest);
-            _logger.LogInformation("{Time} {LogIdentifier} - Motorcycle registered successfully.", DateTime.Now, logIdentifier);
+            MotorcycleResponse result = await _motorcycleService.RegisterMotorcycle(mappedRequest);
+            _logger.LogInformation("{Time} {LogIdentifier} - Moto cadastrada com sucesso.", DateTime.Now, logIdentifier);
             return Ok(result);
         }
 
